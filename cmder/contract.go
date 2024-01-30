@@ -1,11 +1,11 @@
 package cmder
 
-import "time"
+import (
+	"golang.org/x/exp/constraints"
+)
 
 type ArgType interface {
-	bool | string | time.Duration | float32 | float64 |
-		int | int8 | int16 | int32 | int64 |
-		uint | uint8 | uint16 | uint32 | uint64
+	constraints.Integer | ~bool | ~string
 }
 
 type Arg[T ArgType] interface {
@@ -16,8 +16,7 @@ type SliceArg[T ArgType] interface {
 	Value() []T
 }
 type FlagType interface {
-	bool | string | time.Duration | float64 |
-		int | int64 | uint | uint64
+	~bool | ~string | ~float64 | ~int | ~int64 | ~uint | ~uint64
 }
 
 type Optional[T any] interface {
